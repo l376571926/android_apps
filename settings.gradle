@@ -13,7 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
 
+        jcenter()
+        maven {
+            url "https://github.com/rosjava/rosjava_mvn_repo/raw/master"
+        }
+    }
+}
+rootProject.name = "android_apps"
 include 'teleop'
 include 'map_nav'
 include 'make_a_map'

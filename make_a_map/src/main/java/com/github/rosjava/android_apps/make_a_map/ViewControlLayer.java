@@ -20,6 +20,8 @@ package com.github.rosjava.android_apps.make_a_map;
 
 import java.util.concurrent.ExecutorService;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -62,6 +64,7 @@ public class ViewControlLayer extends CameraControlLayer {
     private ViewMode viewMode;
     private String robotFrame;
 
+    Handler handler = new Handler(Looper.getMainLooper());
 
     public ViewControlLayer(final Context context,
                             final ExecutorService executorService,
@@ -81,15 +84,21 @@ public class ViewControlLayer extends CameraControlLayer {
         this.sideLayout = sideLayout;
 
         viewMode = ViewMode.CAMERA;
-        this.cameraView.setOnClickListener(new View.OnClickListener() {
+        handler.post(new Runnable() {
             @Override
-            public void onClick(View v){
-                swapViews();
+            public void run() {
+                ViewControlLayer.this.cameraView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v){
+                        swapViews();
+                    }
+                });
+
+                ViewControlLayer.this.mapView.setClickable(true);
+                ViewControlLayer.this.cameraView.setClickable(false);
             }
         });
 
-        this.mapView.setClickable(true);
-        this.cameraView.setClickable(false);
         this.robotFrame = (String) params.get("robot_frame", context.getString(R.string.robot_frame));
         mapViewGestureAvaiable = false;
     }
