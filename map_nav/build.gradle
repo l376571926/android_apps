@@ -18,12 +18,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.github.rosjava.android_apps.map_nav.kinetic"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 3
         versionName "1.0.0"
     }
@@ -39,4 +39,9 @@ dependencies {
     implementation 'org.ros.rosjava_messages:map_store:[0.3,0.4)'
     implementation 'org.ros.rosjava_messages:move_base_msgs:[1.12,1.13)'
     implementation 'org.ros.rosjava_messages:world_canvas_msgs:[0.2,0.3)'
+
+    implementation 'org.ros.rosjava_messages:geometry_msgs:1.12.7'
+    implementation 'org.ros.rosjava_messages:std_msgs:0.5.11'
+    implementation 'org.ros.rosjava_messages:actionlib_msgs:1.12.7'
+
 }
